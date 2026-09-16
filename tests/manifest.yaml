@@ -1,0 +1,7 @@
+slices:
+  - slice: has_negation
+    threshold: 0.60
+    rationale: ""
+latency:
+  p50_ms_max: 50
+  rationale: ""
