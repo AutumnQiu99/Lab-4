@@ -16,6 +16,12 @@ META_COLS: list[str] = [
     "has_mention",
     "has_negation",
     "length_bucket",
+    "is_all_caps",
+    "has_question_mark",
+    "has_multiple_sentences",
+    "has_exclamation_mark",
+    "has_quote"
+    ""
 ]
 
 # Contractions (don't, can't, isn't, ...) count as negation. Non-capturing group
@@ -34,6 +40,11 @@ def add_metadata(df: pd.DataFrame) -> pd.DataFrame:
     out["emoji_count"] = text.apply(count_emojis).astype(int)
     out["has_hashtag"] = text.str.contains(r"#\w+", regex=True)
     out["has_mention"] = text.str.contains(r"@\w+", regex=True)
+    out["is_all_caps"] = text.str.isupper()
+    out["has_question_mark"] = text.str.contains(r"\?", regex=True)
+    out["has_multiple_sentences"] = text.str.contains(r"[.!?]+", regex=True)
+    out["has_exclamation_mark"] = text.str.contains(r"!", regex=True)
+    out["has_quote"] = text.str.contains(r"['\"]", regex=True)
     out["has_negation"] = text.str.contains(NEGATION_RE, regex=True, case=False)
     out["length_bucket"] = pd.cut(
         text.str.len(),
@@ -50,4 +61,10 @@ def get_slices(df: pd.DataFrame) -> dict[str, pd.Series]:
         "emoji_gt3": df["emoji_count"] > 3,
         "has_negation": df["has_negation"] == True,  # noqa: E712
         "has_hashtag": df["has_hashtag"] == True,  # noqa: E712
+        "has_mention": df["has_mention"] == True, 
+        "has_exclamation_mark": df["has_exclamation_mark"] == True,  
+        "has_question_mark": df["has_question_mark"] == True,
+        "is_all_caps": df["is_all_caps"] == True,
+        "has_multiple_sentences": df["has_multiple_sentences"] == True,
+        "has_quote": df["has_quote"] == True,
     }
