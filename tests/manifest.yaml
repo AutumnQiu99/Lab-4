@@ -1,7 +1,7 @@
 slices:
-  - slice: has_negation
-    threshold: 0.60
-    rationale: ""
+  - slice: has_mention
+    threshold: 0.69
+    rationale: "The model should not predict positive sentiment for tweets that contain mentions."
 latency:
   p50_ms_max: 50
   rationale: ""

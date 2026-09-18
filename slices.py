@@ -21,7 +21,6 @@ META_COLS: list[str] = [
     "has_multiple_sentences",
     "has_exclamation_mark",
     "has_quote",
-    "is_reply",
 ]
 
 # Contractions (don't, can't, isn't, ...) count as negation. Non-capturing group

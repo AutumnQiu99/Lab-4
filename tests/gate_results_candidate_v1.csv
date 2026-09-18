@@ -1,0 +1,4 @@
+test_id,observed,threshold,outcome
+slice::has_mention,0.27403846153846156,0.69,failed
+vs_baseline::has_mention,0.27403846153846156,0.6771153846153846,failed
+latency::p50,28.829521004809067,50.0,passed
